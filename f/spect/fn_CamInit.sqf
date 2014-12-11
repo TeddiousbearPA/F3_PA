@@ -15,8 +15,8 @@ if (typeof _unit != "seagull" && !_forced || !hasInterface) ExitWith {};
 waituntil {missionnamespace getvariable ["BIS_fnc_feedback_allowDeathScreen",true] || isNull (_oldUnit) || _isJIP};
 if(!isnil "BIS_fnc_feedback_allowPP") then
 {
-  // disable effects death effects
-  BIS_fnc_feedback_allowPP = false;
+	// disable effects death effects
+	BIS_fnc_feedback_allowPP = false;
 };
 
 if(_isJIP) then
@@ -55,7 +55,7 @@ switch (f_var_radios) do {
   };
   // TFR
   case 2: {
-    [_newUnit, true] call TFAR_fnc_forceSpectator;
+    [_unit, true] call TFAR_fnc_forceSpectator;
   };
   case 3: {
     [true] call acre_api_fnc_setSpectator;

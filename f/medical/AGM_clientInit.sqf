@@ -14,8 +14,9 @@ player removeItems "FirstAidKit";
 player removeItems "Medikit";
 
 // Add basic items to all units
-player addItem "AGM_EarBuds";
-{player addItem "AGM_Bandage"} forEach [1,2,3,4,5];
+{player addItem "AGM_Bandage"} forEach [1,2,3,4,5,6,7,8];
+{player addItem "AGM_Morphine"} forEach [1,2];
+//player addItem "AGM_Epipen";
 
 if (_typeOfUnit == "m") then
 {

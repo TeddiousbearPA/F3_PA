@@ -73,10 +73,10 @@ if(isServer) then {
 // F3 - Automatic Body Removal
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
-// f_var_removeBodyDelay = 180;
-// f_var_removeBodyDistance = 500;
-// f_var_doNotRemoveBodies = [];
-// [] execVM "f\removeBody\f_addRemoveBodyEH.sqf";
+ f_var_removeBodyDelay = 180;
+ f_var_removeBodyDistance = 500;
+ f_var_doNotRemoveBodies = [];
+ [] execVM "f\removeBody\f_addRemoveBodyEH.sqf";
 
 // ====================================================================================
 
@@ -90,14 +90,6 @@ if(isServer) then {
 // f_var_viewDistance_fixedWing = 5000;
 // f_var_viewDistance_crewOnly = true;
 // [] execVM "f\dynamicViewDistance\f_setViewDistanceLoop.sqf";
-
-// ====================================================================================
-
-// F3 - Authorised Crew Check
-// Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
-
-// VehicleName addEventhandler ["GetIn", {[_this,[UnitName1,UnitName2],false] call f_fnc_authorisedCrewCheck}];
-// VehicleName addEventhandler ["GetIn", {[_this,["UnitClass1","UnitClass2"],false] call f_fnc_authorisedCrewCheck}];
 
 // ====================================================================================
 
@@ -123,24 +115,6 @@ if(isServer) then {
 
 // [] execVM "f\setAISKill\f_setAISkill.sqf";
 // f_var_civAI = independent; // Optional: The civilian AI will use this side's settings
-
-// ====================================================================================
-
-// F3 - Name Tags
-// Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
-
-// f_showGroup_Nametags = true;				// Display unit's group (uses GroupID)
-// f_showDistance_Nametags = true;			// Show distance to player
-// f_showVehicle_Nametags = true;			// Show vehicle player is in
-// [20] execVM "f\nametag\f_nametags.sqf";
-
-// ====================================================================================
-
-// F3 - Group E&E Check
-// Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
-
-// [side,ObjectName or "MarkerName",100,1] execVM "f\EandEcheck\f_EandECheckLoop.sqf";
-// [["Grp1","Grp2"],ObjectName or "MarkerName",100,1] execVM "f\EandEcheck\f_EandECheckLoop.sqf";
 
 // ====================================================================================
 
@@ -177,7 +151,7 @@ if(isServer) then {
 
 f_var_JIP_FirstMenu = false;		// Do players connecting for the first time get the JIP menu? - This only works in missions with respawn.
 f_var_JIP_RemoveCorpse = false;		// Remove the old corpse of respawning players?
-f_var_JIP_GearMenu = true;			// Can JIP/respawned players select their own gear? False will use gear assigned by F3 Gear Component if possible
+f_var_JIP_GearMenu = false;			// Can JIP/respawned players select their own gear? False will use gear assigned by F3 Gear Component if possible
 
 // ====================================================================================
 
@@ -211,3 +185,25 @@ f_wound_extraFAK = 2;
 [] execVM "f\medical\medical_init.sqf";
 
 // ====================================================================================
+
+// PA - Thermals
+// Disable thermal sights for everything
+player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment true}];
+[] execVM "pa\disableThermals.sqf";
+
+// KK - Who's Marking?
+// Show who is messing with markers
+// seems to mess up AGM markers
+//[] execVM "pa\KK_whosMarking.sqf";
+
+// PabstMirror - Mission Intro
+// Credits: PabstMirror
+[] execVM "pa\PM_missionIntro.sqf";
+
+// PA - Force First Person
+// Disable 3PV regardless of server settings
+[] execVM "pa\forceFirstPerson.sqf";
+
+// WS - AI Flashlights
+// Credits: Wolfenswan
+// [] execVM "pa\forceFlashLightAI.sqf";

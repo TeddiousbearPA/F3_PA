@@ -136,13 +136,24 @@ if (_faction in ["blu_g_f","opf_g_f","ind_g_f"]) then {
 
 // ====================================================================================
 
+// GEAR: Modded factions
+// KEEP COMMENTED OUT IF NOT USING
+// DO NOT FORGET TO COPY OVER .SQF FILES
+/*
+if (_faction == "rhs_faction_vdv") then {
+	TF_defaultEastBackpack = "tf_mr3000_rhs";
+	#include "f_assignGear_vdv.sqf";
+};
+*/
+// ====================================================================================
+
 // This variable simply tracks the progress of the gear assignation process, for other
 // scripts to reference.
 
 _unit setVariable ["f_var_assignGear_done",true,true];
 
-// ====================================================================================
 
+// ====================================================================================
 // DEBUG
 
 // ====================================================================================

@@ -13,25 +13,25 @@ if (!isDedicated && (isNull player)) then
 
 // DECLARE VARIABLES AND FUNCTIONS
 
-private ["_unitfaction"];
+private ["_unitSide"];
 
 waitUntil {!isnil "f_var_debugMode"};
 
 // ====================================================================================
 
 // DETECT PLAYER FACTION
-// The following code detects what faction the player's slot belongs to, and stores
-// it in the private variable _unitfaction
+// The following code detects what side the player's slot belongs to, and stores
+// it in the private variable _unitSide
 
-_unitfaction = toLower (faction player);
+_unitSide = toLower (side player);
 
 // If the unitfaction is different from the group leader's faction, the latters faction is used
-if (_unitfaction != toLower (faction (leader group player))) then {_unitfaction = toLower (faction (leader group player))};
+if (_unitSide != toLower (faction (leader group player))) then {_unitSide = toLower (faction (leader group player))};
 
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Player faction: %1",_unitfaction];
+	player sideChat format ["DEBUG (briefing.sqf): Player faction: %1",_unitSide];
 	};
 
 // ====================================================================================
@@ -47,74 +47,57 @@ if (serverCommandAvailable "#kick") then {
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-		player sideChat format ["DEBUG (briefing.sqf): Briefing for host selected.",_unitfaction];
+		player sideChat format ["DEBUG (briefing.sqf): Briefing for host selected."];
 	};
 };
 
 // ====================================================================================
 
-// BRIEFING: BLUFOR > NATO
-// The following block of code executes only if the player is in a NATO slot; it
+// BRIEFING: WEST
+// The following block of code executes only if the player is in a BLU slot; it
 // automatically includes a file which contains the appropriate briefing data.
 
-if (_unitfaction == "blu_f") exitwith {
+if (_unitSide == west) exitwith {
 
-#include "f\briefing\f_briefing_nato.sqf"
+#include "f\briefing\f_briefing_west.sqf"
 
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitfaction];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
 	};
 };
 
 // ====================================================================================
 
-// BRIEFING: FIA
-// The following block of code executes only if the player is in a FIA slot; it
+// BRIEFING: EAST
+// The following block of code executes only if the player is in a OPF slot; it
 // automatically includes a file which contains the appropriate briefing data.
 
-if (_unitfaction in ["blu_g_f","ind_g_f","opf_g_f"]) exitwith {
+if (_unitSide == east) exitwith {
 
-#include "f\briefing\f_briefing_fia.sqf"
+#include "f\briefing\f_briefing_east.sqf"
 
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitfaction];
-	};
-};
-
-// ====================================================================================
-
-// BRIEFING: OPFOR > CSAT
-// The following block of code executes only if the player is in a CSAT slot; it
-// automatically includes a file which contains the appropriate briefing data.
-
-if (_unitfaction == "opf_f") exitwith {
-
-#include "f\briefing\f_briefing_csat.sqf"
-
-// DEBUG
-	if (f_var_debugMode == 1) then
-	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitfaction];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
 	};
 };
 // ====================================================================================
 
-// BRIEFING: INDEPENDENT > AAF
-// The following block of code executes only if the player is in a AAF
+// BRIEFING: INDEPENDENT
+// The following block of code executes only if the player is in a GUER
 // slot; it automatically includes a file which contains the appropriate briefing data.
 
-if (_unitfaction == "ind_f") exitwith {
+if (_unitSide == resistance) exitwith {
 
-#include "f\briefing\f_briefing_aaf.sqf"
+#include "f\briefing\f_briefing_resistance.sqf"
 
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitfaction];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
 	};
 };
 
@@ -124,14 +107,14 @@ if (_unitfaction == "ind_f") exitwith {
 // The following block of code executes only if the player is in a CIVILIAN
 // slot; it automatically includes a file which contains the appropriate briefing data.
 
-if (_unitfaction == "civ_f") exitwith {
+if (_unitSide == civilian) exitwith {
 
 #include "f\briefing\f_briefing_civ.sqf"
 
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitfaction];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
 	};
 };
 
@@ -142,4 +125,4 @@ if (_unitfaction == "civ_f") exitwith {
 // ERROR CHECKING
 // If the faction of the unit cannot be defined, the script exits with an error.
 
-player globalchat format ["DEBUG (briefing.sqf): Faction %1 is not defined.",_unitfaction];
+player globalchat format ["DEBUG (briefing.sqf): Side %1 is not defined.",_unitSide];

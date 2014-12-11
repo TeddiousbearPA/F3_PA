@@ -5,9 +5,19 @@
 
 class Header
 {
+	// Available gameTypes:
+	// Coop:	|	Coop Mission: The meat and bread PA missions
+	// DM		|	Death Match
+	// TDM		|	Team Death Match
+	// CTF		|	Capture The Flag (or, nuke)
+	// SC		|	Sector Control (Think insurgency - the red/green squares)
+	// RPG		|	Skyrim
+	// Sandbox	|	Free Game type, think Dark Ripoff
+	// Seize	|	Seize a location
+	// Defend	|	Defend a location
 	gameType = Coop;
 	minPlayers = 1;
-	maxPlayers = 457;
+	maxPlayers = 100;
 };
 
 // ============================================================================================
@@ -16,9 +26,9 @@ class Header
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
 onLoadName = "*** Insert mission name here. ***";
-onLoadMission = "Made with the F3 Mission Development Framework";
+onLoadMission = "Made with the F3_PA Mission Development Framework";
 author = "*** Insert mission author name here. ***";
-loadScreen = "logo.paa";
+loadScreen = "project.paa";
 
 // ============================================================================================
 
@@ -31,11 +41,24 @@ enableDebugConsole = 1;
 
 // F3 - Respawn Settings
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
+// 1	|	Respawn as Bird (for normal mission, no reinforcements).
+// 2	|	Respawn on death location without gear, used in special missions.
+// 3	|	Respawn at base marker (used when reinforcements are an option).
+// 4	|	Respawn either in group if an AI slot is filled or as seagull.
+// If 3 is chosen, place down makers with the following names as necessary:
+// respawn_west, respawn_guerilla, respawn_east, respawn_civillian.
 
-respawn = 1;
-respawndelay = 3;
+respawn = 4;
+respawndelay = 0;
 respawnOnStart = 0;
-respawnTemplates[] = {"Seagull","f_spectator","f_JIP"};
+respawnTemplates[] = {"f_spectator","f_JIP"};	// remove "f_spectator" when using respawn.
+
+// ============================================================================================
+
+// PA - RotorLib Simulation Setting
+// 0 - default: player options, 1 - all on, 2 - all off.
+
+forceRotorLibSimulation = 2;
 
 // ============================================================================================
 
@@ -83,15 +106,6 @@ class cfgNotifications
 		iconPicture="\A3\UI_F\data\IGUI\Cfg\Actions\settimer_ca.paa";
 		duration = 3;
 		priority = 1;
-	};
-
-	// Notification for the F3 Authorised Crew Component
-	class UnauthorisedCrew {
-		title= "NON-AUTHORISED CREW!";
-		description= "%1";
-		iconPicture = "\A3\ui_f\data\map\markers\military\warning_ca.paa";
-		duration = 3;
-		priority = 5;
 	};
 
 	// Notification for the F3 Mapclick Teleport component
@@ -160,7 +174,7 @@ class Params
             title = "Radio System";
             values[] = {0,1,2,3};
             texts[] = {"Off","ACRE","TFR","ACRE2"};
-            default = 0;
+            default = 2;
             code = "f_var_radios = %1";
     };
 
@@ -174,7 +188,7 @@ class Params
             title = "Medical System";
             values[] = {0,1,2};
             texts[] = {"Arma 3 Default","F3 Simple Wounding System","Authentic Gameplay Mod"};
-            default = 0;
+            default = 2;
             code = "f_var_medical = %1";
     };
 
@@ -188,15 +202,28 @@ class Params
             title = "$STR_f_param_mission_timer";
             values[] = {0,1,2,3,4,5,6,7,8,9,10,15};
             texts[] = {"$STR_f_param_mission_timer_off","1","2","3","4","5","6","7","8","9","10","15"};
-            default = 0;
+            default = 5;
             code = "f_param_mission_timer = %1";
     };
+
+
+// ============================================================================================
+// PA - First Person View
+
+	class pa_first_person
+	{
+		title = "Force First Person";
+		values[] = {0, 1};
+		texts[] = {"Off", "On"};
+		default = 1;
+		code = "pa_param_force_view = %1";
+	};
 
 // ============================================================================================
 
 // F3 - Mission Conditions Selector
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
-
+/*
 	class f_param_weather
 	{
 		title = "$STR_f_param_weather";
@@ -229,7 +256,7 @@ class Params
  		isGlobal = 0;						// Execute this only on the server
  		code = "f_param_timeOfDay = %1";
 	};
-
+*/
 // ============================================================================================
 
 // F3 - AI Skill Selector
@@ -293,7 +320,7 @@ class CfgDebriefing
 	{
 		title = "Ending #1";
 		subtitle = "";
-		description = "*** Insert debriefing #1 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -303,7 +330,7 @@ class CfgDebriefing
 	{
 		title = "Ending #2";
 		subtitle = "";
-		description = "*** Insert debriefing #2 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -313,7 +340,7 @@ class CfgDebriefing
 	{
 		title = "Ending #3";
 		subtitle = "";
-		description = "*** Insert debriefing #3 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -323,7 +350,7 @@ class CfgDebriefing
 	{
 		title = "Ending #4";
 		subtitle = "";
-		description = "*** Insert debriefing #4 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -333,7 +360,7 @@ class CfgDebriefing
 	{
 		title = "Ending #5";
 		subtitle = "";
-		description = "*** Insert debriefing #5 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -343,7 +370,7 @@ class CfgDebriefing
 	{
 		title = "Ending #6";
 		subtitle = "";
-		description = "*** Insert debriefing #6 here. ***";
+		description = "Please post to the AAR thread!";
 		// pictureBackground = "";
 		// picture = "";
 		// pictureColor[] = {0.0,0.3,0.6,1};
@@ -441,11 +468,6 @@ class CfgFunctions
 			class localGroupMarker{};
 			class localSpecialistMarker{};
 		};
-		class authorisedCrew
-		{
-			file = "f\authorisedCrew";
-			class authorisedCrewCheck {};
-		};
 		class FTMemberMarkers
 		{
 			file = "f\FTMemberMarkers";
@@ -468,16 +490,6 @@ class CfgFunctions
 			file = "f\mapClickTeleport";
 			class mapClickTeleportUnit{};
 			class mapClickTeleportGroup{};
-		};
-		class nametag
-		{
-			file = "f\nametag";
-			class drawNameTag{};
-		};
-		class preMount
-		{
-			file = "f\preMount";
-			class mountGroups{};
 		};
 		class zeus
 		{
