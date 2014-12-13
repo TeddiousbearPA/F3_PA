@@ -301,7 +301,7 @@ if (_isMan) then {
 	// ADD UNIVERSAL ITEMS
 	// Add items universal to all units of this faction
 
-	_unit linkItem _nvg;			// Add and equip the faction's nvg
+	//_unit linkItem _nvg;			// Add and equip the faction's nvg
 	_unit addItem _firstaid;		// Add a single first aid kit (FAK)
 	_unit linkItem "ItemMap";		// Add and equip the map
 	_unit linkItem "ItemCompass";	// Add and equip a compass
@@ -320,7 +320,7 @@ _backpack = {
 	_typeofBackPack = _this select 0;
 	switch (_typeofBackPack) do
 	{
-		#include "f_assignGear_fia_western_weapons_b.sqf";
+		#include "f_assignGear_fia_WEST_weapons_b.sqf";
 	};
 };
 
