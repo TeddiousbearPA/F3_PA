@@ -60,7 +60,7 @@
 _silencer1 = "hlc_muzzle_545SUP_AK";	// 5.45 suppressor
 _silencer2 = "hlc_muzzle_762SUP_AK";	// 7.62 suppressor
 
-_scope1 = "hlc_optic_kobra";
+_scope1 = ""; // Kobra has an offset atm
 _scope2 = "hlc_optic_1p29";
 _scope3 = "rhs_acc_pso1m2";
 
