@@ -31,7 +31,7 @@ if (_unitSide != toLower (faction (leader group player))) then {_unitSide = toLo
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Player faction: %1",_unitSide];
+	player sideChat format ["DEBUG (briefing.sqf): Player faction: %1",str _unitSide];
 	};
 
 // ====================================================================================
@@ -64,7 +64,7 @@ if (_unitSide == west) exitwith {
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",str _unitSide];
 	};
 };
 
@@ -81,7 +81,7 @@ if (_unitSide == east) exitwith {
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",str _unitSide];
 	};
 };
 // ====================================================================================
@@ -97,7 +97,7 @@ if (_unitSide == resistance) exitwith {
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",str _unitSide];
 	};
 };
 
@@ -114,7 +114,7 @@ if (_unitSide == civilian) exitwith {
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
-	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",_unitSide];
+	player sideChat format ["DEBUG (briefing.sqf): Briefing for %1 slot selected.",str _unitSide];
 	};
 };
 
@@ -125,4 +125,4 @@ if (_unitSide == civilian) exitwith {
 // ERROR CHECKING
 // If the faction of the unit cannot be defined, the script exits with an error.
 
-player globalchat format ["DEBUG (briefing.sqf): Side %1 is not defined.",_unitSide];
+player globalchat format ["DEBUG (briefing.sqf): Side %1 is not defined.",str _unitSide];
