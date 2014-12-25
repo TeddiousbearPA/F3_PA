@@ -23,7 +23,7 @@ waitUntil {!isnil "f_var_debugMode"};
 // The following code detects what side the player's slot belongs to, and stores
 // it in the private variable _unitSide
 
-_unitSide = toLower (side player);
+_unitSide = side player;
 
 // If the unitfaction is different from the group leader's faction, the latters faction is used
 if (_unitSide != toLower (faction (leader group player))) then {_unitSide = toLower (faction (leader group player))};
