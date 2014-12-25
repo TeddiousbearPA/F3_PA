@@ -25,9 +25,6 @@ waitUntil {!isnil "f_var_debugMode"};
 
 _unitSide = side player;
 
-// If the unitfaction is different from the group leader's faction, the latters faction is used
-if (_unitSide != toLower (faction (leader group player))) then {_unitSide = toLower (faction (leader group player))};
-
 // DEBUG
 	if (f_var_debugMode == 1) then
 	{
