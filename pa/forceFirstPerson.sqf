@@ -1,5 +1,4 @@
 if (isServer) exitWith {};
-if (pa_param_force_view < 1) exitWith {};
 
 [] spawn {
 	while {true} do
