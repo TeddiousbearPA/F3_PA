@@ -206,19 +206,6 @@ class Params
             code = "f_param_mission_timer = %1";
     };
 
-
-// ============================================================================================
-// PA - First Person View
-
-	class pa_first_person
-	{
-		title = "Force First Person";
-		values[] = {0, 1};
-		texts[] = {"Off", "On"};
-		default = 1;
-		code = "pa_param_force_view = %1";
-	};
-
 // ============================================================================================
 
 // F3 - Mission Conditions Selector
