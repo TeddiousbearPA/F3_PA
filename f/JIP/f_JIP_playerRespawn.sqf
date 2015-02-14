@@ -35,16 +35,16 @@ if (isNil "_unit") exitWith {};
 // CHECK FOR GLOBAL VARIABLES
 // Check if the global variables have been initialized, if not, do so with the default values.
 
-if (isNil "f_var_JIP_RespawnMenu") then {f_var_JIP_RespawnMenu = false};
-if (isNil "f_var_JIP_RemoveCorpse") then {f_var_JIP_RemoveCorpse = false};
+if (isNil "f_var_JIP_FirstMenu") then {f_var_JIP_FirstMenu = false};
 if (isNil "f_var_JIP_GearMenu") then {f_var_JIP_GearMenu = true};
+if (isNil "f_var_JIP_RemoveCorpse") then {f_var_JIP_RemoveCorpse = false};
 
 // ===================================================================================
 
-// CHECK FOR RESPAWN (NOT FIRST TIME)
-// If no corpse exists the player is spawned for the first time. 
+// CHECK FOR FIRST TIME SPAWN
+// If no corpse exists the player is spawned for the first time. By default, he won't get the JIP menu in that case.
 
-if (!f_var_JIP_RespawnMenu && !(isNull _corpse)) exitWith {};
+if (!f_var_JIP_FirstMenu && isNull _corpse) exitWith {};
 
 // ====================================================================================
 
@@ -56,7 +56,6 @@ if (!f_var_JIP_GearMenu) then {
 		_loadout = (_unit getVariable "f_var_assignGear");
 		[_loadout,player] call f_fnc_assignGear;
 	};
-	[] execVM "f\radios\radio_init.sqf";
 };
 
 // ====================================================================================
@@ -64,9 +63,9 @@ if (!f_var_JIP_GearMenu) then {
 // ADD JIP MENU TO PLAYER
 // Check if player already has the JIP Menu. If not, add it.
 
-//if (isNil "F3_JIP_reinforcementOptionsAction") then {
-//	[player] execVM "f\JIP\f_JIP_addReinforcementOptionsAction.sqf";
-//};
+if (isNil "F3_JIP_reinforcementOptionsAction") then {
+	[player] execVM "f\JIP\f_JIP_addReinforcementOptionsAction.sqf";
+};
 
 // ====================================================================================
 

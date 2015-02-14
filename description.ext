@@ -58,7 +58,7 @@ respawnTemplates[] = {"f_spectator","f_JIP"};	// remove "f_spectator" when using
 // PA - RotorLib Simulation Setting
 // 0 - default: player options, 1 - all on, 2 - all off.
 
-forceRotorLibSimulation = 0;
+forceRotorLibSimulation = 2;
 
 // ============================================================================================
 
