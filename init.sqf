@@ -188,8 +188,8 @@ f_wound_extraFAK = 2;
 
 // PA - Thermals
 // Disable thermal sights for everything
-player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment true}];
-[] execVM "pa\disableThermals.sqf";
+//player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment true}];
+//[] execVM "pa\disableThermals.sqf";
 
 // KK - Who's Marking?
 // Show who is messing with markers
@@ -202,7 +202,7 @@ player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment t
 
 // PA - Force First Person
 // Disable 3PV regardless of server settings
-[] execVM "pa\forceFirstPerson.sqf";
+//[] execVM "pa\forceFirstPerson.sqf";
 
 // WS - AI Flashlights
 // Credits: Wolfenswan
