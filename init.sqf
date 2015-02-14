@@ -149,9 +149,9 @@ if(isServer) then {
 // F3 - JIP setup
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
-f_var_JIP_FirstMenu = false;		// Do players connecting for the first time get the JIP menu? - This only works in missions with respawn.
+f_var_JIP_JIPMenu = true;		// Do players connecting for the first time get the JIP menu? - This only works in missions with respawn.
+f_var_JIP_RespawnMenu = false;			// Do respawning players get the JIP menu? 
 f_var_JIP_RemoveCorpse = false;		// Remove the old corpse of respawning players?
-f_var_JIP_GearMenu = false;			// Can JIP/respawned players select their own gear? False will use gear assigned by F3 Gear Component if possible
 
 // ====================================================================================
 
@@ -188,8 +188,8 @@ f_wound_extraFAK = 2;
 
 // PA - Thermals
 // Disable thermal sights for everything
-player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment true}];
-[] execVM "pa\disableThermals.sqf";
+//player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment true}];
+//[] execVM "pa\disableThermals.sqf";
 
 // KK - Who's Marking?
 // Show who is messing with markers
@@ -202,7 +202,7 @@ player addEventHandler ["WeaponAssembled",{(_this select 1) disableTIEquipment t
 
 // PA - Force First Person
 // Disable 3PV regardless of server settings
-[] execVM "pa\forceFirstPerson.sqf";
+//[] execVM "pa\forceFirstPerson.sqf";
 
 // WS - AI Flashlights
 // Credits: Wolfenswan

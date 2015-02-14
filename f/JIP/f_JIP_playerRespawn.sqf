@@ -35,36 +35,29 @@ if (isNil "_unit") exitWith {};
 // CHECK FOR GLOBAL VARIABLES
 // Check if the global variables have been initialized, if not, do so with the default values.
 
-if (isNil "f_var_JIP_FirstMenu") then {f_var_JIP_FirstMenu = false};
-if (isNil "f_var_JIP_GearMenu") then {f_var_JIP_GearMenu = true};
+if (isNil "f_var_JIP_JIPMenu") then {f_var_JIP_JIPMenu = true};
+if (isNil "f_var_JIP_RespawnMenu") then {f_var_JIP_RespawnMenu = false};
 if (isNil "f_var_JIP_RemoveCorpse") then {f_var_JIP_RemoveCorpse = false};
 
 // ===================================================================================
 
 // CHECK FOR FIRST TIME SPAWN
-// If no corpse exists the player is spawned for the first time. By default, he won't get the JIP menu in that case.
 
-if (!f_var_JIP_FirstMenu && isNull _corpse) exitWith {};
+if (time < 10 && isNull _corpse) exitWith {}; //if not a JIP exit out
+if (!f_var_JIP_JIPMenu && isNull _corpse) exitWith {}; // If no corpse exists the player is spawned for the first time.
 
 // ====================================================================================
 
 // CHECK FOR GEAR
 // If gear selection is disabled and the unit uses the loadout assigned by the F3 assign Gear component or it's default loadout.
 
-if (!f_var_JIP_GearMenu) then {
+if (!(isNull _corpse)) then { //reset gear if respawning
 	if (typeName (_unit getVariable "f_var_assignGear") == typeName "") then {
 		_loadout = (_unit getVariable "f_var_assignGear");
 		[_loadout,player] call f_fnc_assignGear;
+		[] execVM "f\radios\radio_init.sqf";
+		[] execVM "f\medical\medical_init.sqf";
 	};
-};
-
-// ====================================================================================
-
-// ADD JIP MENU TO PLAYER
-// Check if player already has the JIP Menu. If not, add it.
-
-if (isNil "F3_JIP_reinforcementOptionsAction") then {
-	[player] execVM "f\JIP\f_JIP_addReinforcementOptionsAction.sqf";
 };
 
 // ====================================================================================
@@ -79,3 +72,16 @@ if (typeof _unit != "seagull" && {f_var_JIP_RemoveCorpse && !isNull _corpse}) th
 		deleteVehicle _this;
 	};
 };
+
+// ====================================================================================
+
+// ADD JIP MENU TO PLAYER
+// Check if player already has the JIP Menu. If not, add it.
+
+if (!f_var_JIP_RespawnMenu && !(isNull _corpse)) exitWith {}; //do respawning players get menu?
+
+if (isNil "F3_JIP_reinforcementOptionsAction") then {
+	[player] execVM "f\JIP\f_JIP_addReinforcementOptionsAction.sqf";
+};
+
+

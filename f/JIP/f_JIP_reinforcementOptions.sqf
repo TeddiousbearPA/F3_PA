@@ -4,7 +4,7 @@
 
 // DECLARE VARIABLES AND FUNCTIONS
 
-private ["_unit","_textAction","_grp","_joinDistance","_loadout"];
+private ["_unit","_textAction","_grp","_joinDistance","_loadout","_tpaction"];
 
 // ====================================================================================
 
@@ -23,16 +23,16 @@ _grp = (player getVariable "f_var_JIP_grp");
 // ALLOW PLAYER TO SELECT LOADOUT
 // Using a dialog we allow the player to select the loadout s/he requires.
 
-f_var_JIP_state = 2;
-if (f_var_JIP_GearMenu) then {
-	["JIP",["Select your gear kit."]] call BIS_fnc_showNotification;
-
-	createDialog "KitPicker";
-	waitUntil {f_var_JIP_state == 3};
-
-	_loadout = (player getVariable "f_var_JIP_loadout");
-	[_loadout,player] call f_fnc_assignGear;
-};
+//f_var_JIP_state = 2;
+//if (f_var_JIP_RespawnMenu) then {
+//	["JIP",["Select your gear kit."]] call BIS_fnc_showNotification;
+//
+//	createDialog "KitPicker";
+//	waitUntil {f_var_JIP_state == 3};
+//
+//	_loadout = (player getVariable "f_var_JIP_loadout");
+//	[_loadout,player] call f_fnc_assignGear;
+//};
 
 // ====================================================================================
 
@@ -62,4 +62,17 @@ if (_grp != group player) then {
 	};
 };
 
-
+sleep 5;
+if (isNil "tpAction") then {
+["JIP",["Teleport to Group available"]] call BIS_fnc_showNotification;
+tpAction = player addAction ["<t color='#dddd00'>Teleport to Group", "pa\jipTeleport.sqf",[],6,true,false,"","_target == player"];
+[tpAction,player] spawn 
+{
+	while {(_this select 1) distance (getpos (_this select 1)) < 50 && alive (_this select 1)} do 
+	{
+		sleep 5;
+	};
+	(_this select 1) removeaction (_this select 0);
+	tpAction = nil;
+};
+};
