@@ -23,16 +23,16 @@ _grp = (player getVariable "f_var_JIP_grp");
 // ALLOW PLAYER TO SELECT LOADOUT
 // Using a dialog we allow the player to select the loadout s/he requires.
 
-f_var_JIP_state = 2;
-if (f_var_JIP_GearMenu) then {
-	["JIP",["Select your gear kit."]] call BIS_fnc_showNotification;
-
-	createDialog "KitPicker";
-	waitUntil {f_var_JIP_state == 3};
-
-	_loadout = (player getVariable "f_var_JIP_loadout");
-	[_loadout,player] call f_fnc_assignGear;
-};
+//f_var_JIP_state = 2;
+//if (f_var_JIP_GearMenu) then {
+//	["JIP",["Select your gear kit."]] call BIS_fnc_showNotification;
+//
+//	createDialog "KitPicker";
+//	waitUntil {f_var_JIP_state == 3};
+//
+//	_loadout = (player getVariable "f_var_JIP_loadout");
+//	[_loadout,player] call f_fnc_assignGear;
+//};
 
 // ====================================================================================
 
@@ -62,4 +62,14 @@ if (_grp != group player) then {
 	};
 };
 
+
+_tpaction = player addAction ["Teleport to Squad", "pa\jipTeleport.sqf"];
+[_tpaction,getpos player] spawn 
+{
+	while {player distance (_this select 1) < 50} do 
+	{
+		sleep 10;
+	};
+	player removeaction (_this select 0);
+};
 
