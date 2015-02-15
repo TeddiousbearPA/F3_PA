@@ -1,18 +1,18 @@
 // F3 - Spectator Script
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
-// params
+// params 
 _this spawn {
 _unit = [_this, 0, player,[objNull]] call BIS_fnc_param;
 _oldUnit = [_this, 1, objNull,[objNull]] call BIS_fnc_param;
 _forced = [_this, 4, false,[false]] call BIS_fnc_param;
-_isJIP = false;
+_isJIP = false; 
 // if they are jip, these are null
 if(isNull _unit ) then {_unit = cameraOn;_isJIP=true;};
 // escape the script if you are not a seagull unless forced
-if (typeof _unit != "seagull" && !_forced || !hasInterface) ExitWith {};
+if (typeof _unit != "seagull" && (isnull _oldUnit) || !hasInterface) ExitWith {};
 // disable this to instantly switch to the spectator script.
-waituntil {missionnamespace getvariable ["BIS_fnc_feedback_allowDeathScreen",true] || isNull (_oldUnit) || _isJIP};
+//waituntil {missionnamespace getvariable ["BIS_fnc_feedback_allowDeathScreen",true] || isNull (_oldUnit) || _isJIP};
 if(!isnil "BIS_fnc_feedback_allowPP") then
 {
 	// disable effects death effects
