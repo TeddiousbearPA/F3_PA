@@ -65,7 +65,7 @@ if (_grp != group player) then {
 sleep 5;
 _notAlone = false;
 {
-if (side _x == side player) exitWith {_notAlone = true};
+if (side _x == side player && _x != player) exitWith {_notAlone = true};
 }foreach playableUnits;
 
 
