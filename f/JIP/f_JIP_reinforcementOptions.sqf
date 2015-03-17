@@ -4,7 +4,7 @@
 
 // DECLARE VARIABLES AND FUNCTIONS
 
-private ["_unit","_textAction","_grp","_joinDistance","_loadout","_tpaction"];
+private ["_unit","_textAction","_grp","_joinDistance","_loadout","_tpaction","_notAlone"];
 
 // ====================================================================================
 
@@ -63,16 +63,27 @@ if (_grp != group player) then {
 };
 
 sleep 5;
-if (isNil "tpAction") then {
+_notAlone = false;
+{
+if (side _x == side player && _x != player) exitWith {_notAlone = true};
+}foreach playableUnits;
+
+
+if (isNil "tpAction" && _notAlone) then {
 ["JIP",["Teleport to Group available"]] call BIS_fnc_showNotification;
 tpAction = player addAction ["<t color='#dddd00'>Teleport to Group", "pa\jipTeleport.sqf",[],6,true,false,"","_target == player"];
 [tpAction,player] spawn 
 {
-	while {(_this select 1) distance (getpos (_this select 1)) < 50 && alive (_this select 1)} do 
+	private ["_startPos"];
+	_startPos = getpos (_this select 1);
+	while {_startPos distance getpos (_this select 1) < 50 && alive player} do 
 	{
 		sleep 5;
 	};
 	(_this select 1) removeaction (_this select 0);
 	tpAction = nil;
 };
+};
+if (!_notAlone) then {
+["JIP",["Teleport to Group NOT available"]] call BIS_fnc_showNotification;
 };

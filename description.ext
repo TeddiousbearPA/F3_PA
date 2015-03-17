@@ -48,7 +48,7 @@ enableDebugConsole = 1;
 // If 3 is chosen, place down makers with the following names as necessary:
 // respawn_west, respawn_guerilla, respawn_east, respawn_civillian.
 
-respawn = 4;
+respawn = 3; //Suggested NOT to change this
 respawndelay = 0;
 respawnOnStart = 0;
 respawnTemplates[] = {"f_JIP","f_spectator"};	// remove "f_spectator" when using respawn.

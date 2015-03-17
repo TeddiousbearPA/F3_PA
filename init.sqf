@@ -118,6 +118,13 @@ if(isServer) then {
 
 // ====================================================================================
 
+// F3 - Assign Gear AI
+// Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
+
+// [] execVM "f\assignGear\f_assignGear_AI.sqf";
+
+// ====================================================================================
+
 // F3 - ORBAT Notes
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
@@ -152,6 +159,7 @@ if(isServer) then {
 f_var_JIP_JIPMenu = true;		// Do players connecting for the first time get the JIP menu? - This only works in missions with respawn.
 f_var_JIP_RespawnMenu = false;			// Do respawning players get the JIP menu? 
 f_var_JIP_RemoveCorpse = false;		// Remove the old corpse of respawning players?
+f_var_JIP_Spectate = false;		// JIP players go into spectate straight away?
 
 // ====================================================================================
 
