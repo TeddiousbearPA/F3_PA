@@ -2,8 +2,8 @@
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
 
-// ADD CUSTOM SECTIONS
-// Add all messages you want only the admin to be able to see here:
+// ADD MISSION MAKER NOTES SECTIONS
+// All text added below will only be visible to the current admin
 
 _customText = "";
 
@@ -14,7 +14,7 @@ _customText = "";
 
 _briefing ="
 <br/>
-ADMIN SECTION<br/>
+<font size='18'>ADMIN SECTION</font><br/>
 This briefing section can only be seen by the current admin.
 <br/><br/>
 ";
@@ -24,14 +24,15 @@ This briefing section can only be seen by the current admin.
 // MISSION-MAKER NOTES
 // This section displays notes made by the mission-maker for the ADMIN
 
-_briefing ="
-<br/>
-MISSION-MAKER NOTES<br/>
-Notes and messages made by the mission-maker.
-";
+if (_customText != "") then {
+	_briefing ="
+	<br/>
+	<font size='18'>MISSION-MAKER NOTES</font><br/>
+	Notes and messages from the mission-maker:<br/>
+	";
 
-_briefing = _briefing + _customText;
-_briefing = _briefing + "<br/><br/>";
+	_briefing = _briefing + _customText + "<br/><br/>";
+};
 
 // ====================================================================================
 
@@ -48,14 +49,14 @@ while {true} do {
 	_description = getText (missionconfigfile >> "CfgDebriefing" >> format ["end%1",_i] >> "description");
 	if (_title == "") exitWith {};
 	_ending = [_i,_title,_description];
-	_endings set [count _endings,_ending];
+	_endings append ([_ending]);
 	_i = _i + 1;
 };
 
 // Create the briefing section to display the endings
 
 _briefing = _briefing + "
-ENDINGS<br/>
+<font size='18'>ENDINGS</font><br/>
 These endings are available. To trigger an ending click on its link.<br/><br/>
 ";
 
@@ -69,32 +70,56 @@ These endings are available. To trigger an ending click on its link.<br/><br/>
 
 // ====================================================================================
 
+// SAFE START SECTION
+
+_briefing = _briefing + "
+<font size='18'>SAFE START CONTROL</font><br/>
+|- <execute expression=""f_var_mission_timer = f_var_mission_timer + 1; publicVariable 'f_var_mission_timer'; hintsilent format ['Mission Timer: %1',f_var_mission_timer];"">
+Increase Safe Start timer by 1 minute</execute><br/>
+
+|- <execute expression=""f_var_mission_timer = f_var_mission_timer - 1; publicVariable 'f_var_mission_timer'; hintsilent format ['Mission Timer: %1',f_var_mission_timer];"">
+Decrease Safe Start timer by 1 minute</execute><br/>
+
+|- <execute expression=""[[[],'f\safeStart\f_safeStart.sqf'],'BIS_fnc_execVM',true]  call BIS_fnc_MP;
+hintsilent 'Safe Start started!';"">
+Begin Safe Start timer</execute><br/>
+
+|- <execute expression=""f_var_mission_timer = -1; publicVariable 'f_var_mission_timer';
+[['SafeStartMissionStarting',['Mission starting now!']],'bis_fnc_showNotification',true] call BIS_fnc_MP;
+[[false],'f_fnc_safety',playableUnits + switchableUnits] call BIS_fnc_MP;
+hintsilent 'Safe Start ended!';"">
+End Safe Start timer</execute><br/>
+
+|- <execute expression=""[[true],'f_fnc_safety',playableUnits + switchableUnits] call BIS_fnc_MP;
+hintsilent 'Safety on!' "">
+Force safety on for all players</execute><br/>
+
+|- <execute expression=""[[false],'f_fnc_safety',playableUnits + switchableUnits] call BIS_fnc_MP;
+hintsilent 'Safety off!' "">
+Force safety off for all players</execute><br/><br/>
+";
+
+// ====================================================================================
+
 // ADD ZEUS SUPPORT SECTION
 
 _briefing = _briefing + "
-ZEUS SUPPORT<br/>
+<font size='18'>ZEUS SUPPORT</font><br/>
 <execute expression=""
 if !(isNull (getAssignedCuratorLogic player)) then {hintsilent 'ZEUS already assigned!'} else {
-	[[player],'f_fnc_zeusInit',false] spawn BIS_fnc_MP; hintsilent 'Curator assigned.';
+	[[player,true],'f_fnc_zeusInit',false] spawn BIS_fnc_MP; hintsilent 'Curator assigned.';
 };"">Assign ZEUS to host</execute>.<br/>
-
-|- <execute expression=""
-if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {(getAssignedCuratorLogic player) addEventHandler ['CuratorObjectPlaced',{[[crew (_this select 1),'f\setAISKill\f_setAISkill.sqf'],'Bis_fnc_ExecVM',false] spawn BIS_fnc_MP;}];
-	hintsilent 'Enabled F3 AI Skill Support for ZEUS'};"">Enable F3 AI Skill Support for created units</execute>.<br/>
-
-|- <execute expression=""
-if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {[[player,true],'f_fnc_zeusAddAddons',false] spawn BIS_fnc_MP; hintsilent 'Given access to all addons.'};"">Give ZEUS access to all addons</execute>.<br/>
 
 |- <execute expression=""
 if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {[[player,playableUnits],'f_fnc_zeusAddObjects',false] spawn BIS_fnc_MP; hintsilent 'Added playable units.'};"">Add players and playable units to ZEUS object list</execute>.<br/>
 
 |- <execute expression=""
 if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {
-	[[player,true,true],'f_fnc_zeusAddObjects',false] spawn BIS_fnc_MP; hintsilent 'Assigned control over all group leaders and empty vehicles.'};"">Give ZEUS control over all group leaders and empty vehicles</execute>.<br/>
+	[[player,true,true],'f_fnc_zeusAddObjects',false] spawn BIS_fnc_MP; hintsilent 'Assigned control over all group leaders and empty vehicles.'};"">
+Add all group leaders and empty vehicles</execute>.<br/>
 
 |- <execute expression=""
-if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {[[player,true],'f_fnc_zeusAddObjects',false] spawn BIS_fnc_MP; hintsilent 'Given control over all units.'};"">Gain control over all objects</execute>.<br/>
-(CAUTION: CAN CAUSE SIGNIFICANT DESYNC/LAG)<br/>
+if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {[[player,true],'f_fnc_zeusAddObjects',false] spawn BIS_fnc_MP; hintsilent 'Add all units.'};"">Add all mission objects</execute> <font color='#FF0000'>(POSSIBLE DESYNC)</font>.<br/>
 
 |- <execute expression=""
 if (isNull (getAssignedCuratorLogic player)) then {hintsilent 'Assign ZEUS first!'} else {(getAssignedCuratorLogic player) removeCuratorEditableObjects [allDead,true]; hintsilent 'Removed dead units.'};"">Remove all dead units from ZEUS</execute>.<br/>
