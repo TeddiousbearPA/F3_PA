@@ -156,11 +156,17 @@ if(isServer) then {
 // F3 - JIP setup
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
-f_var_JIP_JIPMenu = true;		// Do players connecting for the first time get the JIP menu? - This only works in missions with respawn.
+// Note: if you want respawn, go to description.ext and remove "f_spectator" from respawnTemplates[]
+f_var_JIP_JIPMenu = true;		// Do JIP players get the JIP menu?
 f_var_JIP_RespawnMenu = false;			// Do respawning players get the JIP menu? 
 f_var_JIP_RemoveCorpse = false;		// Remove the old corpse of respawning players?
 f_var_JIP_Spectate = false;		// JIP players go into spectate straight away?
-
+if (!isdedicated) then {
+	[]spawn {
+		waitUntil {sleep 0.1; !isNull player}; 
+		player addEventHandler ["killed", "['F_ScreenSetup'] call BIS_fnc_blackOut"];
+	};
+};
 // ====================================================================================
 
 // F3 - AI Unit Caching

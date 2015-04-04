@@ -49,9 +49,10 @@ enableDebugConsole = 1;
 // respawn_west, respawn_guerilla, respawn_east, respawn_civillian.
 
 respawn = 3; //Suggested NOT to change this
-respawndelay = 0;
+respawndelay = 4;
 respawnOnStart = 0;
 respawnTemplates[] = {"f_JIP","f_spectator"};	// remove "f_spectator" when using respawn.
+respawnDialog = 0;
 
 // ============================================================================================
 
