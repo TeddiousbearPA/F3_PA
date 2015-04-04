@@ -39,7 +39,7 @@ if(isNil "f_cam_VirtualCreated") then
 {
 // Get a position in which to create the virtual unit
 //_pos = if !(isNull _oldUnit) then [{getPos _oldUnit},{getPos allUnits select 0}];
-_pos = [0,0,getTerrainHeightASL [0,0] + 5 + (count alldeadmen) * 5];
+_pos = [0,0,5 + (count alldeadmen) * 5];
 createCenter sideLogic;
 _newGrp = createGroup sideLogic;
 _newGrp setvariable ["f_cacheExcl", true,true];
