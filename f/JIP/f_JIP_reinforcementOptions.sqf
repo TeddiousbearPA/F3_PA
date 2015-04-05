@@ -67,7 +67,7 @@ if (_grp != group player) then {
 sleep 5;
 _notAlone = false;
 {
-	if (side _x == side player && _x != player) exitWith {_notAlone = true};
+	if (side (group _x) == side (group player) && _x != player) exitWith {_notAlone = true};
 }foreach playableUnits;
 
 
@@ -78,7 +78,7 @@ if (isNil "tpAction" && _notAlone) then {
 	{
 		private ["_startPos"];
 		_startPos = getpos (_this select 1);
-		while {_startPos distance getpos (_this select 1) < 50 && alive player} do 
+		while {_startPos distance getpos (_this select 1) < 100 && alive player} do 
 		{
 			sleep 5;
 		};

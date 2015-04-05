@@ -29,7 +29,7 @@ if (_unit == player) then {
 	{
 			private ["_startPos"];
 			_startPos = getpos (_this select 1);
-			while {_startPos distance getpos (_this select 1) < 50 && alive (_this select 1) && !(isNil "F3_JIP_reinforcementOptionsAction")} do 
+			while {_startPos distance getpos (_this select 1) < 100 && alive (_this select 1) && !(isNil "F3_JIP_reinforcementOptionsAction")} do 
 			{
 				sleep 5;
 			};
