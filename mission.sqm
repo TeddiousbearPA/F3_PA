@@ -69,7 +69,6 @@ class Mission
 		"A3_Armor_F_APC_Wheeled_03",
 		"A3_Armor_F_T100K",
 		"A3_Armor_F_EPB_MBT_03",
-		"A3_Air_F_EPB_Heli_Light_03",
 		"A3_Soft_F_TruckHeavy",
 		"A3_Soft_F_MRAP_03",
 		"A3_Soft_F_MRAP_01",
@@ -153,7 +152,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.60000002;
 					text="UnitNATO_CO_UAV";
-					init="GrpNATO_CO = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpNATO_CO = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="NATO UAV Operator";
 				};
 				class Item3
@@ -213,7 +212,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.60000002;
 					text="UnitNATO_DC_UAV";
-					init="GrpNATO_DC = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpNATO_DC = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="NATO UAV Operator";
 				};
 				class Item3
@@ -901,7 +900,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.60000002;
 					text="UnitCSAT_CO_UAV";
-					init="GrpCSAT_CO = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpCSAT_CO = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="CSAT UAV Operator";
 				};
 				class Item3
@@ -963,7 +962,7 @@ class Mission
 					rank="CORPORAL";
 					skill=0.60000002;
 					text="UnitCSAT_DC_UAV";
-					init="GrpCSAT_DC = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpCSAT_DC = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="CSAT UAV Operator";
 				};
 				class Item3
@@ -1798,7 +1797,7 @@ class Mission
 					player="PLAY CDG";
 					skill=0.60000002;
 					text="UnitAAF_CO_UAV";
-					init="GrpAAF_CO = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpAAF_CO = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="AAF UAV Operator";
 				};
 				class Item3
@@ -1855,7 +1854,7 @@ class Mission
 					player="PLAY CDG";
 					skill=0.60000002;
 					text="UnitAAF_DC_UAV";
-					init="GrpAAF_DC = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpAAF_DC = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="AAF UAV Operator";
 				};
 				class Item3
@@ -6419,7 +6418,7 @@ class Mission
 					player="PLAY CDG";
 					skill=0.60000002;
 					text="UnitFIA_CO_UAV";
-					init="GrpFIA_CO = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpFIA_CO = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="FIA UAV Operator";
 				};
 				class Item3
@@ -6478,7 +6477,7 @@ class Mission
 					player="PLAY CDG";
 					skill=0.60000002;
 					text="UnitFIA_DC_UAV";
-					init="GrpFIA_DC = group this; [""uav"",this] call f_fnc_assignGear; nul = this execVM ""f\chargeUAV\f_chargeUAVaction.sqf"";";
+					init="GrpFIA_DC = group this; [""uav"",this] call f_fnc_assignGear; ";
 					description="FIA UAV Operator";
 				};
 				class Item3
@@ -8209,7 +8208,7 @@ class Mission
 			position[]={7922.8633,35.427017,10779.894};
 			id=524;
 			side="EMPTY";
-			vehicle="I_Heli_light_03_F";
+			vehicle="I_Heli_Transport_02_F";
 			leader=1;
 			skill=0.60000002;
 			text="VehAAF_AH1";
@@ -8567,7 +8566,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=2;
+		items=6;
 		class Item0
 		{
 			position[]={7963.1147,39.532951,11157.285};
@@ -8581,6 +8580,30 @@ class Mission
 			name="f_extract";
 			text="extract";
 			type="mil_end";
+		};
+		class Item2
+		{
+			position[]={8197.7471,25.386816,11132.601};
+			name="respawn_west";
+			type="Empty";
+		};
+		class Item3
+		{
+			position[]={8213.9648,25.13279,11132.354};
+			name="respawn_east";
+			type="Empty";
+		};
+		class Item4
+		{
+			position[]={8197.5859,22.895708,11114.55};
+			name="respawn_guerrila";
+			type="Empty";
+		};
+		class Item5
+		{
+			position[]={8213.5215,23.001724,11114.417};
+			name="respawn_civilian";
+			type="Empty";
 		};
 	};
 };
