@@ -41,8 +41,10 @@ _grp = (player getVariable "f_var_JIP_grp");
 // NB This is on the assumption that the player has made positive selections and not
 // cancelled the menu.
 
-player removeAction F3_JIP_reinforcementOptionsAction;
-F3_JIP_reinforcementOptionsAction = nil;
+if (!isNil "F3_JIP_reinforcementOptionsAction") then {
+	player removeAction F3_JIP_reinforcementOptionsAction;
+	F3_JIP_reinforcementOptionsAction = nil;
+};
 
 // ====================================================================================
 
@@ -65,25 +67,25 @@ if (_grp != group player) then {
 sleep 5;
 _notAlone = false;
 {
-if (side _x == side player && _x != player) exitWith {_notAlone = true};
+	if (side _x == side player && _x != player) exitWith {_notAlone = true};
 }foreach playableUnits;
 
 
 if (isNil "tpAction" && _notAlone) then {
-["JIP",["Teleport to Group available"]] call BIS_fnc_showNotification;
-tpAction = player addAction ["<t color='#dddd00'>Teleport to Group", "pa\jipTeleport.sqf",[],6,true,false,"","_target == player"];
-[tpAction,player] spawn 
-{
-	private ["_startPos"];
-	_startPos = getpos (_this select 1);
-	while {_startPos distance getpos (_this select 1) < 50 && alive player} do 
+	["JIP",["Teleport to Group available"]] call BIS_fnc_showNotification;
+	tpAction = player addAction ["<t color='#dddd00'>Teleport to Group", "pa\jipTeleport.sqf",[],6,true,false,"","_target == player"];
+	[tpAction,player] spawn 
 	{
-		sleep 5;
+		private ["_startPos"];
+		_startPos = getpos (_this select 1);
+		while {_startPos distance getpos (_this select 1) < 50 && alive player} do 
+		{
+			sleep 5;
+		};
+		(_this select 1) removeaction (_this select 0);
+		tpAction = nil;
 	};
-	(_this select 1) removeaction (_this select 0);
-	tpAction = nil;
-};
 };
 if (!_notAlone) then {
-["JIP",["Teleport to Group NOT available"]] call BIS_fnc_showNotification;
+	["JIP",["Teleport to Group NOT available"]] call BIS_fnc_showNotification;
 };

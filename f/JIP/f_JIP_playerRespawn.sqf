@@ -27,6 +27,12 @@ private ["_unit","_corpse"];
 _unit = _this select 0;
 _corpse = _this select 1;
 
+//if there is spectate and a corpse exit out
+if ((getArray (missionconfigfile >> "RespawnTemplates") find "f_spectator") > -1 && !(isNull _corpse)) exitWith {};
+
+//Remove blackout, spectate script related
+[]spawn {uiSleep 2; ["F_ScreenSetup"] call BIS_fnc_blackIn;};
+
 // Exit if the unit doesn't exist (can occur when JIPing into missions with no respawn)
 if (isNil "_unit") exitWith {};
 
@@ -78,8 +84,9 @@ if (typeof _unit != "seagull" && {f_var_JIP_RemoveCorpse && !isNull _corpse}) th
 // ADD JIP MENU TO PLAYER
 // Check if player already has the JIP Menu. If not, add it.
 
-if (!f_var_JIP_RespawnMenu && !(isNull _corpse)) exitWith {}; //do respawning players get menu?
 
+if (!f_var_JIP_RespawnMenu && !(isNull _corpse)) exitWith {}; //do respawning players get menu?
+sleep 5;
 if (isNil "F3_JIP_reinforcementOptionsAction") then {
 	[player] execVM "f\JIP\f_JIP_addReinforcementOptionsAction.sqf";
 };
