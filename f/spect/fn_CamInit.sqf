@@ -38,7 +38,7 @@ if(_isJIP) then
 if(isNil "f_cam_VirtualCreated") then
 {
 // Get a position in which to create the virtual unit
-_pos = [0,0,5 + (count alldeadmen) * 5];
+_pos = [random(5),random(5),random(3) + 5 + (count alldeadmen) * 5];
 createCenter sideLogic;
 _newGrp = createGroup sideLogic;
 _newGrp setvariable ["f_cacheExcl", true,true];
