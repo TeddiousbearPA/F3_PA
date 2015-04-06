@@ -189,6 +189,7 @@ f_wound_extraFAK = 2;
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
 // Note: if you want respawn, go to description.ext and remove "f_spectator" from respawnTemplates[]
+// Note: respawn_west etc. markers are mandatory. When not using respawn, place these markers somewhere players will not go
 f_var_JIP_JIPMenu = true;		// Do JIP players get the JIP menu?
 f_var_JIP_RespawnMenu = false;	// Do respawning players get the JIP menu? 
 f_var_JIP_RemoveCorpse = false;	// Remove the old corpse of respawning players?
