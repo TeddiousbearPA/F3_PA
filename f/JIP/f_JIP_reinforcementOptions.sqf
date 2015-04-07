@@ -59,8 +59,9 @@ if (_grp != group player) then {
 	[player] joinSilent grpNull;
 
 	if (!isNull _grp) then {
-		[_grp,_joinDistance] execVM "f\JIP\f_JIP_nearTargetGroupCheck.sqf";
-		["JIP",[format ["Selection successful. Get within %2m of %1 to link up.",name leader _grp,_joinDistance]]] call BIS_fnc_showNotification;
+		[player] joinSilent _grp;
+		//[_grp,_joinDistance] execVM "f\JIP\f_JIP_nearTargetGroupCheck.sqf";
+		["JIP",[format ["Selection successful. Your group leader is %1",name leader _grp]]] call BIS_fnc_showNotification;
 	};
 };
 
