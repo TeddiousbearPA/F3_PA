@@ -118,7 +118,6 @@ if (_leader == player) then {
 } foreach units group player;
 
 } else {
-	if (_leader distance player > 10) then {
 	{
 		if (((side _x) getFriend (side player) < 0.6 ) && alive _x) then {//check for enemies near player
 			if (_x distance _leader < 25) then {
@@ -159,7 +158,6 @@ if (_leader == player) then {
 		hintSilent format ["Teleported to %1",name _leader]; 
 		sleep 2;	
 		breakTo "main";
-	};
 	};
 };
 };
