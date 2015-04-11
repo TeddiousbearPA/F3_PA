@@ -17,7 +17,7 @@ if (count units group player == 1) then {
 	
 	_bguy = _x;
 	{
-		if (((side _x) getFriend (side player) < 0.6 ) && alive _x) then {//check for enemies near player
+		if (((side (group _x)) getFriend (side (group player)) < 0.6 ) && alive _x) then {//check for enemies near player
 			if (_x distance _bguy < 25) then {
 				hintSilent "Enemies nearby, try again later"; 
 				breakTo "main";
@@ -73,7 +73,7 @@ if (_leader == player) then {
 	if (_x distance player > 50) then {
 	_bguy = _x;
 	{
-		if (((side _x) getFriend (side player) < 0.6 ) && alive _x) then {//check for enemies near player
+		if (((side (group _x)) getFriend (side (group player)) < 0.6 ) && alive _x) then {//check for enemies near player
 			if (_x distance _bguy < 25) then {
 				hintSilent "Enemies nearby, try again later"; 
 				breakTo "main";
@@ -119,7 +119,7 @@ if (_leader == player) then {
 
 } else {
 	{
-		if (((side _x) getFriend (side player) < 0.6 ) && alive _x) then {//check for enemies near player
+		if (((side (group _x)) getFriend (side (group player)) < 0.6 ) && alive _x) then {//check for enemies near player
 			if (_x distance _leader < 25) then {
 				hintSilent "Enemies nearby, try again later"; 
 				breakTo "main";
