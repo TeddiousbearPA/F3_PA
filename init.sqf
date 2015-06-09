@@ -1,13 +1,5 @@
 // ====================================================================================
 
-// TEMP BIS BUG Fix
-f_var_debugMode = 0;
-f_param_radios = 2;
-f_param_medical = 2;
-f_param_ace3 = 1;
-tf_no_auto_long_range_radio = true;
-f_radios_settings_tfr_defaultLRBackpacks = false;
-
 // F3 - Disable Saving and Auto Saving
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 
