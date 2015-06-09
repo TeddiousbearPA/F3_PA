@@ -2,10 +2,6 @@
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
 
-//temp BIS bug fix for params
-f_var_debugMode = 0;
-f_param_backpacks = 0;
-
 // DECLARE VARIABLES AND FUNCTIONS
 
 private ["_faction","_typeofUnit","_unit"];
