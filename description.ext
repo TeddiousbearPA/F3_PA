@@ -69,6 +69,15 @@ disabledAI = true;
 
 // ============================================================================================
 
+//PA Remove corpse manager
+
+corpseManagerMode = 1;
+corpseLimit = 15;
+corpseRemovalMinTime = 60; //seconds
+corpseRemovalMaxTime = 300; //seconds
+
+// ============================================================================================
+
 
 // F3 - Start of Notifications block.
 
