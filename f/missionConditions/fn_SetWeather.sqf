@@ -2,6 +2,9 @@
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
 
+// F3 PA - Only execute on Server & BIS_Fnc change
+if (!isServer) ExitWith {};
+
 // DECLARE VARIABLES AND FUNCTIONS
 
 private ["_weather","_missionOvercast","_MissionRain","_MissionRainbow","_MissionLightnings","_MissionWindStr","_MissionWindGusts","_MissionWaves","_MissionHumidity"];
@@ -105,7 +108,7 @@ switch (_weather) do
 // Rain (Light Winds)
 	case 6:
 	{
-		_MissionOvercast = 1;
+		_MissionOvercast = 0.9;
 		_MissionRain = 1;
 		_MissionRainbow = 0;
 		_MissionLightnings = 0;
@@ -117,7 +120,7 @@ switch (_weather) do
 // Rain (Strong Winds)
 	case 7:
 	{
-		_MissionOvercast = 1;
+		_MissionOvercast = 0.9;
 		_MissionRain = 1;
 		_MissionRainbow = 0;
 		_MissionLightnings = 0;
@@ -146,7 +149,9 @@ switch (_weather) do
 // Use new values to set
 // mission conditions on server and all clients (including JIP clients).
 
-if (typeName _transition == typeName 0) then {
+
+[_MissionOvercast] call BIS_fnc_setOvercast;
+/*if (typeName _transition == typeName 0) then {
 
 _transition setOvercast  _MissionOvercast;
 _transition setRain _MissionRain;
@@ -165,7 +170,7 @@ _transition setLightnings _MissionLightnings;
 	0 setWaves _MissionWaves;
 	0 setLightnings _MissionLightnings;
 	forceWeatherChange;
-};
+};*/
 
 // ====================================================================================
 

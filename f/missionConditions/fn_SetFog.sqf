@@ -2,6 +2,9 @@
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
 
+// F3 PA - Only execute on Server & BIS_Fnc change
+if (!isServer) ExitWith {};
+
 // DECLARE VARIABLES AND FUNCTIONS
 
 private ["_fog","_strength","_decay","_base"];
@@ -36,16 +39,16 @@ switch (_fog) do
 	//Light
 	case 1:
 	{
-		_strength = 0.2;
-		_decay = 0;
+		_strength = 0.15;
+		_decay = 0.011;
 		_base = 0;
 	};
 
 	//Heavy
 	case 2:
 	{
-		_strength = 0.4;
-		_decay = 0;
+		_strength = 0.3;
+		_decay = 0.011;
 		_base = 0;
 	};
 };
@@ -55,7 +58,8 @@ switch (_fog) do
 // SET MISSION CONDITIONS
 // Use the new values to set the transition across the network
 
-_transition setFog [_strength,_decay,_base];
+[_strength,_decay,_base] call BIS_fnc_setFog;
+//_transition setFog [_strength,_decay,_base];
 
 // ====================================================================================
 
