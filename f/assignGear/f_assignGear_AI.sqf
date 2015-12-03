@@ -5,7 +5,7 @@
 // SERVER CHECK
 // Make sure that the script is only run on the server
 
-if !(isServer) exitWith {};
+if (hasInterface && !isServer) exitWith {};
 
 // ====================================================================================
 
@@ -62,10 +62,10 @@ _unitClasses = [
 
 // Interpret parameters
 _units = if (count _this == 0) then [{waitUntil {scriptDone f_script_setLocalVars};f_var_men},{_this}];
+if !(local (_units select 0)) exitWith {};
 
 // LOOP THROUGH AI UNITS AND ASSIGN GEAR
 {
-
 	sleep 0.1;
 	_unit = _x;
 
