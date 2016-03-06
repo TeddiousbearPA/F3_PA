@@ -14,12 +14,12 @@ private "_typeOfUnit";
 _typeOfUnit = player getVariable "f_var_assignGear";
 
 // ACE Hearing
-if (true) then //ace_hearing_EnableCombatDeafness
+/*if (true) then //ace_hearing_EnableCombatDeafness
 {
 	// Deprecated method, uncomment and remove the second line if you want players to manually insert earplugs
 	//player addItem "ACE_EarPlugs";
     player setVariable ["ACE_hasEarPlugsIn", true, true];
-};
+};*/
 
 // ACE Maptools
 if (_typeOfUnit in [
